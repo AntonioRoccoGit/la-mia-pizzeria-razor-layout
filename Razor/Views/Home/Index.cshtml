@@ -1,0 +1,97 @@
+﻿<!-- DATA -->
+@{
+    ViewData["Title"] = "Home Page";
+    string name = "Antonio";
+    string surname = "Rocco";
+    string stringToCheck = "nel mezzo del cammin di nostra vita";
+    DateTime nowDate = DateTime.Now;
+
+}
+
+
+<!-- TEMPLATE -->
+<ul>
+    <!-- EX 1-->
+    <li>
+        Dichiarare una variabile valorizzandola con il nostro nome.
+        Dichiarare un'altra variabile valorizzandola con il nostro cognome.
+        Stampare il nostro nome e cognome all'interno di un tag h2.
+        <h2>@name @surname</h2>
+    </li>
+
+    <!-- EX 2-->
+    <li>
+        Creare una funzione che stampa la somma dei numeri che vanno da 1 a n (con n passato come parametro - n incluso)
+        Stampare dentro uno span il risultato.
+        <span> <strong> La somma da 1 a 100 di tutti i numeri è: @SummFromOneToN(100)</strong> </span>
+        
+    </li>
+
+    <!-- EX 3-->
+    <li>
+        Contare quante volte la lettera a è presente nalla frase "@stringToCheck" e stampare questo valore in pagina 
+        <span>La lettera "a" nella frase è presente: @CheckLetterInAString(stringToCheck, 'a')</span>
+    </li>
+    <!-- EX 4-->
+    <li>
+        Creare una List< int > di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) e mostrare in pagina solo i numeri compresi tra 20 e 70 <br>
+            @foreach (var number in RndmNumberList(20))
+            {
+                <span style="font-weight: bold;">@number</span>
+            }
+        
+    </li>
+    <li>
+        Stampare in pagina la data e l'ora attuale (usando la classe DateTime) con il formato anno-mese-giorno ore:minuti:secondi: (@nowDate.ToString("yyyy-MM-dd , HH:mm:ss")
+    </li>
+    <li>
+        SPartendo dalla data di oggi (usando la classe DateTime) stampare in pagina
+        a. la data di 7 giorni fa: (@nowDate.AddDays(-7).ToString("dd-MM-yyyy , HH:mm:ss")
+    </li>
+    <li>
+        che giorno della settimana è oggi (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...): (@nowDate.ToString("dddd"))
+    </li>
+    <li>
+        che giorno della settimana sarà nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...): (@nowDate.AddYears(1).ToString("dd-MM-yyyy, dddd"))
+    </li>
+</ul>
+
+
+<!-- FUNCTIONS -->
+@{
+    //Exercise 2
+    int SummFromOneToN(int n)
+    {
+        if (n < 2)
+            return 1;
+        return n + SummFromOneToN(n - 1);
+    }
+
+    //Exercise 3
+    int CheckLetterInAString(string stringToCheck, char letter)
+    {
+        int counter = 0;
+        foreach(char item in stringToCheck )
+        {
+            if (item == letter)
+                counter++;
+        }
+        return counter;
+    }
+
+    //Exercise 4
+    List<int> RndmNumberList(int manyNumber)
+    {
+        List<int> rndmNumberList = new List<int>();
+        Random rnd = new Random();
+
+        for(int i=0; i < manyNumber; i++)
+        {
+            int rndNumber = rnd.Next(1, 91);
+            if (rndNumber >= 20 && rndNumber <= 70)
+               rndmNumberList.Add(rndNumber);
+        }
+
+        return rndmNumberList;
+    }
+}
