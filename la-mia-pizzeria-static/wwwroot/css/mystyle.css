@@ -3,3 +3,14 @@
     margin: 0 auto;
     padding-top: 5rem
 }
+
+footer h5{
+    text-align:center;
+}
+
+.ms_container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
